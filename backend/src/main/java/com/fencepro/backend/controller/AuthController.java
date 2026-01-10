@@ -1,12 +1,8 @@
 package com.fencepro.backend.controller;
-
-import com.fencepro.backend.security.jwt.JwtService;
+import com.fencepro.backend.service.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -14,40 +10,50 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
+    private final AuthService authService;
 
-    public AuthController(JwtService jwtService,
-                          UserDetailsService userDetailsService,
-                          PasswordEncoder passwordEncoder) {
-        this.jwtService = jwtService;
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
-
     public record LoginRequest(String username, String password) { }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        UserDetails user = userDetailsService.loadUserByUsername(request.username());
-
-        if (!passwordEncoder.matches(request.password(), user.getPassword())) {
-            throw new BadCredentialsException("Credenciales incorrectas");
-        }
-
-        String token = jwtService.generateToken(user.getUsername());
-
-        return ResponseEntity.ok(Map.of("token", token, "tokenType", "Bearer"));
+        return ResponseEntity.ok(authService.login(request.username(), request.password()));
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
     public ResponseEntity<?> me(Authentication authentication) {
-        return ResponseEntity.ok(Map.of("usename", authentication.getName(), "authorities", authentication.getAuthorities()));
+        return ResponseEntity.ok(Map.of("username", authentication.getName(), "authorities", authentication.getAuthorities()));
     }
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(){
-        return ResponseEntity.ok(Map.of("message", "Logout OK (stateless)"));
+        return ResponseEntity.ok(Map.of("message", "Logout OK"));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin-only")
+    public ResponseEntity<?> adminOnly(){
+        return ResponseEntity.ok(Map.of("message", "Admin Only"));
+    }
+
+    @PreAuthorize("hasRole('MANAGER')")
+    @GetMapping("/manager-only")
+    public ResponseEntity<?> managerOnly(){
+        return ResponseEntity.ok(Map.of("message", "Manager Only"));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @GetMapping("/admin-or-manager")
+    public ResponseEntity<?> adminOrManager(){
+        return ResponseEntity.ok(Map.of("message", "Admin Or Manager"));
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("user-only")
+    public ResponseEntity<?> userOnly(){
+        return ResponseEntity.ok(Map.of("message", "User Only"));
     }
 }

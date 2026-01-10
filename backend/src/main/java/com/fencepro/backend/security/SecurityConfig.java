@@ -4,6 +4,8 @@ import com.fencepro.backend.security.jwt.JwtAuthenticationFilter;
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -36,8 +38,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(
                                     "/ping",
-                                    "/auth/login",
-                                    "/auth/logout",
+                                    "/auth/**",
                                     "/swagger-ui/**",
                                     "/swagger-ui.html",
                                     "/v3/api-docs/**"
@@ -56,11 +57,26 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
         @Bean
         public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-            UserDetails user = User.withUsername("admin")
+            UserDetails admin = User.withUsername("admin")
                     .password(encoder.encode("admin1234"))
                     .roles("ADMIN")
                     .build();
 
-            return new InMemoryUserDetailsManager(user);
+            UserDetails manager = User.withUsername("manager")
+                    .password(encoder.encode("manager1234"))
+                    .roles("MANAGER")
+                    .build();
+
+            UserDetails user = User.withUsername("user")
+                    .password(encoder.encode("user1234"))
+                    .roles("USER")
+                    .build();
+
+            return new InMemoryUserDetailsManager(admin, manager, user);
+        }
+
+        @Bean
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+            return config.getAuthenticationManager();
         }
     }
