@@ -3,6 +3,7 @@ package com.fencepro.backend.controller;
 import com.fencepro.backend.security.jwt.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,14 +13,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
-public class TestAuthController {
+public class AuthController {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
-    public TestAuthController(JwtService jwtService,
-                              UserDetailsService userDetailsService,
-                              PasswordEncoder passwordEncoder) {
+    public AuthController(JwtService jwtService,
+                          UserDetailsService userDetailsService,
+                          PasswordEncoder passwordEncoder) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
@@ -37,11 +38,16 @@ public class TestAuthController {
 
         String token = jwtService.generateToken(user.getUsername());
 
-        return ResponseEntity.ok(Map.of("token", token));
+        return ResponseEntity.ok(Map.of("token", token, "tokenType", "Bearer"));
     }
 
-    @GetMapping("/private")
-    public ResponseEntity<?> privateEndPoint(){
-        return ResponseEntity.ok(Map.of("message", "Has entrado con JWT válido"));
+    @GetMapping("/me")
+    public ResponseEntity<?> me(Authentication authentication) {
+        return ResponseEntity.ok(Map.of("usename", authentication.getName(), "authorities", authentication.getAuthorities()));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(){
+        return ResponseEntity.ok(Map.of("message", "Logout OK (stateless)"));
     }
 }
