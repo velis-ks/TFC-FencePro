@@ -39,21 +39,21 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("message", "Admin Only"));
     }
 
-    @PreAuthorize("hasRole('MANAGER')")
-    @GetMapping("/manager-only")
-    public ResponseEntity<?> managerOnly(){
-        return ResponseEntity.ok(Map.of("message", "Manager Only"));
+    @PreAuthorize("hasRole('ENTRENADOR')")
+    @GetMapping("/entrenador-only")
+    public ResponseEntity<?> entrenadorOnly(){
+        return ResponseEntity.ok(Map.of("message", "Entrenador Only"));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
-    @GetMapping("/admin-or-manager")
-    public ResponseEntity<?> adminOrManager(){
-        return ResponseEntity.ok(Map.of("message", "Admin Or Manager"));
-    }
-
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("user-only")
+    @PreAuthorize("hasRole('DEPORTISTA')")
+    @GetMapping("deportista-only")
     public ResponseEntity<?> userOnly(){
-        return ResponseEntity.ok(Map.of("message", "User Only"));
+        return ResponseEntity.ok(Map.of("message", "Deportista Only"));
+    }
+
+    @PreAuthorize("hasRole('ARBITRO')")
+    @GetMapping("arbitro-only")
+    public ResponseEntity<?> arbitroOnly(){
+        return ResponseEntity.ok(Map.of("message", "Deportista Only"));
     }
 }
