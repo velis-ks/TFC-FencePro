@@ -38,8 +38,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .authorizeHttpRequests(auth -> auth
                             .requestMatchers(
                                     "/ping",
-                                    "auth/logout",
-                                    "auth/logout",
+                                    "/auth/logout",
+                                    "/auth/login",
                                     "/swagger-ui/**",
                                     "/swagger-ui.html",
                                     "/v3/api-docs/**"
