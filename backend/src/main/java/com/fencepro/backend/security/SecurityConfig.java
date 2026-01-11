@@ -63,17 +63,32 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .roles("ADMIN")
                     .build();
 
-            UserDetails manager = User.withUsername("manager")
-                    .password(encoder.encode("manager1234"))
-                    .roles("MANAGER")
+            UserDetails entrenador = User.withUsername("entrenador")
+                    .password(encoder.encode("entrenador1234"))
+                    .roles("ENTRENADOR")
                     .build();
 
-            UserDetails user = User.withUsername("user")
-                    .password(encoder.encode("user1234"))
-                    .roles("USER")
+            UserDetails deportista = User.withUsername("deportista")
+                    .password(encoder.encode("deportista1234"))
+                    .roles("DEPORTISTA")
                     .build();
 
-            return new InMemoryUserDetailsManager(admin, manager, user);
+            UserDetails federativo = User.withUsername("federativo")
+                    .password(encoder.encode("federativo1234"))
+                    .roles("FEDERATIVO")
+                    .build();
+
+            UserDetails club = User.withUsername("club")
+                    .password(encoder.encode("club1234"))
+                    .roles("CLUB")
+                    .build();
+
+            UserDetails arbitro = User.withUsername("arbitro")
+                    .password(encoder.encode("arbitro1234"))
+                    .roles("ÁRBITRO")
+                    .build();
+
+            return new InMemoryUserDetailsManager(admin, entrenador, deportista, federativo, club, arbitro);
         }
 
         @Bean
