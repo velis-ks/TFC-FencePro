@@ -1,14 +1,14 @@
 package com.fencepro.model.enums;
 
 /**
- * Enum que representa los tipos de licencia
- * Corresponde al ENUM 'tipo_licencia' en la tabla 'licencias'
+ * Tipo de licencia.
+ * Mapeado con tabla 'licencias'.
  */
 public enum TipoLicencia {
-    DEPORTISTA("Licencia de Deportista", 50.00),
-    ENTRENADOR("Licencia de Entrenador", 75.00),
-    ARBITRO("Licencia de Árbitro", 60.00),
-    CLUB("Licencia de Club", 200.00);
+    DEPORTISTA("Licencia Deportiva", 50.0),
+    ENTRENADOR("Licencia Técnico", 75.0),
+    ARBITRO("Licencia Árbitro", 60.0),
+    CLUB("Licencia Entidad", 200.0);
 
     private final String descripcion;
     private final double precioBase;
@@ -18,25 +18,5 @@ public enum TipoLicencia {
         this.precioBase = precioBase;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public double getPrecioBase() {
-        return precioBase;
-    }
-
-    /**
-     * Obtiene el tipo de licencia a partir de su nombre (case-insensitive)
-     */
-    public static TipoLicencia fromString(String tipo) {
-        if (tipo == null) {
-            throw new IllegalArgumentException("El tipo de licencia no puede ser nulo");
-        }
-        try {
-            return TipoLicencia.valueOf(tipo.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Tipo de licencia inválido: " + tipo);
-        }
-    }
+    public double getPrecio() { return precioBase; }
 }

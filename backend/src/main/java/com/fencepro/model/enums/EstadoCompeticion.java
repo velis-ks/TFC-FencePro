@@ -1,66 +1,22 @@
 package com.fencepro.model.enums;
 
 /**
- * Enum que representa el estado de una competición
- * Corresponde al ENUM 'estado' en la tabla 'competiciones'
+ * Ciclo de vida del torneo.
+ * Mapeado con tabla 'competiciones'.
  */
 public enum EstadoCompeticion {
-    ABIERTA("Abierta", "Inscripciones abiertas", true),
-    EN_CURSO("En curso", "Competición en curso", false),
-    FINALIZADA("Finalizada", "Competición finalizada", false),
-    CANCELADA("Cancelada", "Competición cancelada", false);
+    ABIERTA("Inscripciones abiertas", true),
+    EN_CURSO("Competición en marcha", false),
+    FINALIZADA("Competición terminada", false),
+    CANCELADA("Competición suspendida", false);
 
-    private final String nombre;
     private final String descripcion;
-    private final boolean aceptaInscripciones;
+    private final boolean permiteInscripciones;
 
-    EstadoCompeticion(String nombre, String descripcion, boolean aceptaInscripciones) {
-        this.nombre = nombre;
+    EstadoCompeticion(String descripcion, boolean permiteInscripciones) {
         this.descripcion = descripcion;
-        this.aceptaInscripciones = aceptaInscripciones;
+        this.permiteInscripciones = permiteInscripciones;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public boolean aceptaInscripciones() {
-        return aceptaInscripciones;
-    }
-
-    /**
-     * Verifica si la competición está activa
-     */
-    public boolean estaActiva() {
-        return this == ABIERTA || this == EN_CURSO;
-    }
-
-    /**
-     * Verifica si la competición ha terminado
-     */
-    public boolean haTerminado() {
-        return this == FINALIZADA || this == CANCELADA;
-    }
-
-    /**
-     * Obtiene el estado a partir de su nombre (case-insensitive)
-     */
-    public static EstadoCompeticion fromString(String estado) {
-        if (estado == null) {
-            throw new IllegalArgumentException("El estado no puede ser nulo");
-        }
-
-        // Manejar casos especiales con guión bajo
-        String estadoNormalizado = estado.toUpperCase().replace(" ", "_");
-
-        try {
-            return EstadoCompeticion.valueOf(estadoNormalizado);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Estado de competición inválido: " + estado);
-        }
-    }
+    public boolean admiteInscripciones() { return permiteInscripciones; }
 }
