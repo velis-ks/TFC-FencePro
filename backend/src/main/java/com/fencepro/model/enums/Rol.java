@@ -1,8 +1,8 @@
 package com.fencepro.model.enums;
 
 /**
- * Enum que representa los roles de usuario en el sistema FencePro
- * Corresponde al ENUM 'rol' en la tabla 'usuarios'
+ * Roles de usuario permitidos en el sistema.
+ * Mapeado estrictamente con el ENUM 'rol' de la tabla 'usuarios'.
  */
 public enum Rol {
     ADMIN("Administrador del sistema"),
@@ -19,19 +19,5 @@ public enum Rol {
 
     public String getDescripcion() {
         return descripcion;
-    }
-
-    /**
-     * Obtiene el rol a partir de su nombre (case-insensitive)
-     */
-    public static Rol fromString(String rol) {
-        if (rol == null) {
-            throw new IllegalArgumentException("El rol no puede ser nulo");
-        }
-        try {
-            return Rol.valueOf(rol.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Rol inválido: " + rol);
-        }
     }
 }

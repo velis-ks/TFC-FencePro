@@ -1,72 +1,34 @@
 package com.fencepro.model.enums;
 
 /**
- * Enum que representa las categorías de edad de los deportistas
- * Corresponde al ENUM 'categoria' en la tabla 'deportistas'
+ * Categorías de edad oficiales.
+ * Mapeado estrictamente con el ENUM 'categoria' de las tablas 'deportistas' y 'competiciones'.
  */
 public enum Categoria {
-    INFANTIL("Infantil", "Menores de 11 años", 0, 10),
-    CADETE("Cadete", "De 11 a 13 años", 11, 13),
-    JUNIOR("Junior", "De 14 a 17 años", 14, 17),
-    SENIOR("Senior", "De 18 a 39 años", 18, 39),
-    VETERANO("Veterano", "40 años o más", 40, 999);
+    M15("M15", "Menores de 15 años", 0, 15),
+    M17("M17", "Cadetes (15-17 años)", 15, 17),
+    M20("M20", "Junior (17-20 años)", 17, 20), // Corregido según SQL
+    ABS("ABS", "Absoluta / Senior (+20)", 20, 99); // Corregido según SQL
 
-    private final String nombre;
+    private final String nombreDb;
     private final String descripcion;
     private final int edadMinima;
     private final int edadMaxima;
 
-    Categoria(String nombre, String descripcion, int edadMinima, int edadMaxima) {
-        this.nombre = nombre;
+    Categoria(String nombreDb, String descripcion, int edadMinima, int edadMaxima) {
+        this.nombreDb = nombreDb;
         this.descripcion = descripcion;
         this.edadMinima = edadMinima;
         this.edadMaxima = edadMaxima;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getDescripcion() { return descripcion; }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public int getEdadMinima() {
-        return edadMinima;
-    }
-
-    public int getEdadMaxima() {
-        return edadMaxima;
-    }
-
-    /**
-     * Obtiene la categoría según la edad del deportista
-     */
+    // Lógica útil para asignar categoría automática
     public static Categoria fromEdad(int edad) {
-        if (edad < 0) {
-            throw new IllegalArgumentException("La edad no puede ser negativa");
-        }
-
-        for (Categoria categoria : values()) {
-            if (edad >= categoria.edadMinima && edad <= categoria.edadMaxima) {
-                return categoria;
-            }
-        }
-
-        return VETERANO; // Por defecto si es mayor de 999 años (caso imposible)
-    }
-
-    /**
-     * Obtiene la categoría a partir de su nombre (case-insensitive)
-     */
-    public static Categoria fromString(String categoria) {
-        if (categoria == null) {
-            throw new IllegalArgumentException("La categoría no puede ser nula");
-        }
-        try {
-            return Categoria.valueOf(categoria.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Categoría inválida: " + categoria);
-        }
+        if (edad < 15) return M15;
+        if (edad < 17) return M17;
+        if (edad < 20) return M20;
+        return ABS;
     }
 }

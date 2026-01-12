@@ -3,7 +3,7 @@ package com.fencepro.model.entity;
 import com.fencepro.model.enums.Arma;
 import com.fencepro.model.enums.Categoria;
 import com.fencepro.model.enums.NivelTecnico;
-import com.fencepro.model.enums.Sexo;
+import com.fencepro.model.enums.Genero;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -52,7 +52,7 @@ public class Deportista {
     @NotNull(message = "El sexo es obligatorio")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 1)
-    private Sexo sexo;
+    private Genero genero;
 
     @Column(name = "foto_url", length = 255)
     private String fotoUrl;

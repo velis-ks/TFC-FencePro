@@ -1,13 +1,13 @@
 package com.fencepro.model.enums;
 
 /**
- * Enum que representa los tipos de arma en esgrima
- * Corresponde al ENUM 'arma' en varias tablas
+ * Las tres armas de la esgrima.
+ * Usado en 'deportistas', 'competiciones' y 'entrenamientos'.
  */
 public enum Arma {
-    FLORETE("Florete", "Arma ligera, tocados con la punta en el torso"),
-    ESPADA("Espada", "Arma más pesada, tocados con la punta en todo el cuerpo"),
-    SABLE("Sable", "Arma de corte y punta, tocados de cintura para arriba");
+    FLORETE("Florete", "Arma ligera, tocado en tronco"),
+    ESPADA("Espada", "Arma pesada, tocado en todo el cuerpo"),
+    SABLE("Sable", "Arma de corte y punta, tocado de cintura arriba");
 
     private final String nombre;
     private final String descripcion;
@@ -17,25 +17,6 @@ public enum Arma {
         this.descripcion = descripcion;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    /**
-     * Obtiene el arma a partir de su nombre (case-insensitive)
-     */
-    public static Arma fromString(String arma) {
-        if (arma == null) {
-            throw new IllegalArgumentException("El arma no puede ser nula");
-        }
-        try {
-            return Arma.valueOf(arma.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Arma inválida: " + arma);
-        }
-    }
+    public String getNombre() { return nombre; }
+    public String getDescripcion() { return descripcion; }
 }
