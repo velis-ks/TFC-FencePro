@@ -2,8 +2,17 @@ package com.fencepro.model.entity;
 
 import com.fencepro.model.enums.Rol;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Entidad que representa a cualquier usuario del sistema.
@@ -13,7 +22,11 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "usuarios")
 @Data // Lombok: Genera Getters, Setters, toString, equals, hashcode automáticamente
-public class Usuario {
+@Builder //Crear objetos fácilmente
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremental en MySQL
@@ -62,4 +75,25 @@ public class Usuario {
             activo = true;
         }
     }
+
+    //Métodos de seguridad (UserDetails)
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + rol.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email; //Uso del email para loguearse
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {return true;}
+    @Override
+    public boolean isAccountNonLocked() {return true;}
+    @Override
+    public boolean isCredentialsNonExpired() {return true;}
+    @Override
+    public boolean isEnabled() {return Boolean.TRUE.equals(activo);}
 }
