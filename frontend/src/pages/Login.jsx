@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/FencePro_Logo.png';
+import './Login.css';
+
 
 function Login() {
   const handleSubmit = (e) => {
@@ -14,7 +16,7 @@ function Login() {
         <img src={logo} alt="FencePro" className="auth-logo" />
 
 
-        <h2>Bienvenido</h2>
+        <h2>Bienvenid@</h2>
 
         <form onSubmit={handleSubmit}>
           <input
@@ -28,6 +30,17 @@ function Login() {
             placeholder="Contraseña"
             required
           />
+          <div className="auth-forgot">
+            <span
+              className="forgot-link"
+              onClick={() => {
+              console.log("Recuperar contraseña");
+              }}
+            >
+              ¿Has olvidado la contraseña?
+            </span>
+          </div>
+
 
           <button type="submit">Iniciar sesión</button>
         </form>
