@@ -1,15 +1,16 @@
 package com.fencepro.backend.controller;
 
 import com.fencepro.backend.dto.RegistroArbitroRequest;
+import com.fencepro.backend.dto.response.ArbitroPerfilResponse;
+import com.fencepro.backend.dto.response.DeportistaPerfilResponse;
 import com.fencepro.backend.service.ArbitroService;
 import com.fencepro.model.entity.Arbitro;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/arbitros")
@@ -25,6 +26,16 @@ public class ArbitroController {
             return ResponseEntity.ok("Árbitro registrado con éxito. ID: "  + arbitro.getId());
         }catch(Exception e){
             return ResponseEntity.badRequest().body("Error en el registro: " + e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ArbitroPerfilResponse>> listarArbitros() {
+        try {
+            List<ArbitroPerfilResponse> lista = arbitroService.listarTodos();
+            return ResponseEntity.ok(lista);
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
