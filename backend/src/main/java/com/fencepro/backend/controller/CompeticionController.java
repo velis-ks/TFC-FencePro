@@ -1,15 +1,16 @@
 package com.fencepro.backend.controller;
 
 import com.fencepro.backend.dto.CrearCompeticionRequest;
+import com.fencepro.backend.dto.response.CompeticionResponse;
 import com.fencepro.backend.service.CompeticionService;
+import com.fencepro.model.entity.Competicion;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/competiciones")
@@ -27,6 +28,16 @@ public class CompeticionController {
             return ResponseEntity.ok().body("Competición creada con éxito. ID: " + competicion.getId());
         }catch(Exception e){
             return ResponseEntity.badRequest().body("Error al crear competicion: " + e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CompeticionResponse>> listarCompeticiones(){
+        try{
+            List<CompeticionResponse> lista = competicionService.listarTodas();
+            return ResponseEntity.ok(lista);
+        }catch(Exception e){
+            return ResponseEntity.internalServerError().build();
         }
     }
 }

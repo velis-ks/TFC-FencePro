@@ -1,6 +1,7 @@
 package com.fencepro.backend.service;
 
 import com.fencepro.backend.dto.CrearCompeticionRequest;
+import com.fencepro.backend.dto.response.CompeticionResponse;
 import com.fencepro.model.entity.Arbitro;
 import com.fencepro.model.entity.Competicion;
 import com.fencepro.model.enums.Arma;
@@ -12,6 +13,9 @@ import com.fencepro.repository.CompeticionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -64,5 +68,30 @@ public class CompeticionService {
         competicion.setArbitro(arbitro);
 
         return competicionRepository.save(competicion);
+    }
+
+    public List<CompeticionResponse> listarTodas(){
+        return competicionRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    private CompeticionResponse mapToResponse(Competicion competicion){
+        return CompeticionResponse.builder()
+                .id(competicion.getId())
+                .nombre(competicion.getNombre())
+                .descripcion(competicion.getDescripcion())
+                .fechaInicio(competicion.getFechaInicio())
+                .fechaFin(competicion.getFechaFin())
+                .ubicacion(competicion.getUbicacion())
+                .arma(competicion.getArma().name())
+                .categoria(competicion.getCategoria().name())
+                .nivel(competicion.getNivel().name())
+                .estado(competicion.getEstado().name())
+                .capacidadMaxima(competicion.getCapacidadMaxima())
+                .inscritosActuales(0) //TODO: Implementar cálculo
+                .precioInscripcion(competicion.getPrecioInscripcion())
+                .build();
     }
 }
