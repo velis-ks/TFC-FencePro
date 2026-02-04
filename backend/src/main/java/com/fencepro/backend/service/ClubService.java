@@ -1,7 +1,10 @@
 package com.fencepro.backend.service;
 
 import com.fencepro.backend.dto.RegistroClubRequest;
+import com.fencepro.backend.dto.response.ClubPerfilResponse;
+import com.fencepro.backend.dto.response.DeportistaPerfilResponse;
 import com.fencepro.model.entity.Club;
+import com.fencepro.model.entity.Deportista;
 import com.fencepro.model.entity.Usuario;
 import com.fencepro.model.enums.Rol;
 import com.fencepro.repository.ClubRepository;
@@ -10,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -60,5 +66,26 @@ public class ClubService {
         club.setFechaFundacion(request.getFechaFundacion());
 
         return clubRepository.save(club);
+    }
+
+    //Obtener la lista de todos los deportistas
+    public List<ClubPerfilResponse> listarTodos(){
+        return clubRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    private ClubPerfilResponse mapToResponse(Club club) {
+        return ClubPerfilResponse.builder()
+                .id(club.getId())
+                .nombreResponsable(club.getUsuario().getNombre() + " " + club.getUsuario().getApellidos())
+                .emailLogin(club.getUsuario().getEmail())
+                .nombreClub(club.getNombreClub())
+                .cif(club.getCif())
+                .ciudad(club.getCiudad())
+                .emailPublico(club.getEmailClub())
+                .rol(Rol.CLUB.name())
+                .build();
     }
 }

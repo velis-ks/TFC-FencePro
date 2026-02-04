@@ -1,7 +1,10 @@
 package com.fencepro.backend.service;
 
 import com.fencepro.backend.dto.RegistroArbitroRequest;
+import com.fencepro.backend.dto.response.ArbitroPerfilResponse;
+import com.fencepro.backend.dto.response.DeportistaPerfilResponse;
 import com.fencepro.model.entity.Arbitro;
+import com.fencepro.model.entity.Deportista;
 import com.fencepro.model.entity.Usuario;
 import com.fencepro.model.enums.NivelArbitro;
 import com.fencepro.model.enums.NivelTecnico;
@@ -14,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -67,5 +72,26 @@ public class ArbitroService {
         arbitro.setCompeticionesArbitradas(0);
 
         return arbitroRepository.save(arbitro);
+    }
+
+    //Obtener la lista de todos los árbitros
+    public List<ArbitroPerfilResponse> listarTodos(){
+        return arbitroRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    private ArbitroPerfilResponse mapToResponse(Arbitro arbitro) {
+        return ArbitroPerfilResponse.builder()
+                .id(arbitro.getId())
+                .nombre(arbitro.getUsuario().getNombre())
+                .apellidos(arbitro.getUsuario().getApellidos())
+                .email(arbitro.getUsuario().getEmail())
+                .nivel(arbitro.getNivel().name())
+                .numeroLicencia(arbitro.getNumeroLicencia())
+                .competicionesArbitradas(arbitro.getCompeticionesArbitradas())
+                .rol(Rol.ARBITRO.name())
+                .build();
     }
 }
