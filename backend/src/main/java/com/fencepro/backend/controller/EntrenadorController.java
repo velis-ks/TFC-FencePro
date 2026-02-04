@@ -1,14 +1,15 @@
 package com.fencepro.backend.controller;
 
 import com.fencepro.backend.dto.RegistroEntrenadorRequest;
+import com.fencepro.backend.dto.response.DeportistaPerfilResponse;
+import com.fencepro.backend.dto.response.EntrenadorPerfilResponse;
 import com.fencepro.backend.service.EntrenadorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/entrenadores")
@@ -24,6 +25,16 @@ public class EntrenadorController {
             return ResponseEntity.ok("Entrenador registrado con éxito. ID: " + entrenador.getId());
         }catch(Exception e){
             return ResponseEntity.badRequest().body("Error durante el registro: " + e.getMessage());
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<EntrenadorPerfilResponse>> listarEntrenadores() {
+        try {
+            List<EntrenadorPerfilResponse> lista = entrenadorService.listarTodos();
+            return ResponseEntity.ok(lista);
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
