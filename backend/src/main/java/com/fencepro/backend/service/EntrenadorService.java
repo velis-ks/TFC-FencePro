@@ -1,6 +1,9 @@
 package com.fencepro.backend.service;
 
 import com.fencepro.backend.dto.RegistroEntrenadorRequest;
+import com.fencepro.backend.dto.response.DeportistaPerfilResponse;
+import com.fencepro.backend.dto.response.EntrenadorPerfilResponse;
+import com.fencepro.model.entity.Deportista;
 import com.fencepro.model.entity.Entrenador;
 import com.fencepro.model.entity.Usuario;
 import com.fencepro.model.enums.Especialidad;
@@ -13,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -75,5 +80,28 @@ public class EntrenadorService {
 
         return entrenadorRepository.save(entrenador);
 
+    }
+
+    //Obtener la lista de todos los entrenadores
+    public List<EntrenadorPerfilResponse> listarTodos(){
+        return entrenadorRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+    private EntrenadorPerfilResponse mapToResponse(Entrenador entrenador) {
+
+        return EntrenadorPerfilResponse.builder()
+                .id(entrenador.getId())
+                .nombre(entrenador.getUsuario().getNombre())
+                .apellidos(entrenador.getUsuario().getApellidos())
+                .email(entrenador.getUsuario().getEmail())
+                .dni(entrenador.getDni())
+                .especialidad(entrenador.getEspecialidad().name())
+                .titulacion(entrenador.getTitulacion())
+                .anosExperiencia(entrenador.getAnosExperiencia())
+                .numeroLicencia(entrenador.getNumeroLicencia())
+                .rol(Rol.ENTRENADOR.name())
+                .build();
     }
 }
