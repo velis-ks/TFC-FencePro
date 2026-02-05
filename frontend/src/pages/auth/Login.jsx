@@ -1,11 +1,47 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import logo from '../../assets/FencePro_Logo.png';
 import '../../styles/Login.css';
 
 function Login() {
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // aquí irá el backend
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:8080/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Usuario y/o contraseña incorrectos');
+      }
+
+      const data = await response.json();
+
+      //Guardamos el token y el rol
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('rol', data.rol);
+
+      console.log('Inicio de sesión correcto: ', data);
+
+      //Redirección según el rol de usuario
+      if(data.rol === 'ADMIN') {
+        navigate('/admin');
+      }else {
+        //TODO redigir al resto de roles
+        alert("Inicio de sesión correcto como " + data.rol);
+      }
+    }catch(err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -17,11 +53,15 @@ function Login() {
           <input
             type="email"
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <input
             type="password"
             placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <div className="auth-forgot">
