@@ -23,21 +23,12 @@ public class CompeticionController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','CLUB')")
     public ResponseEntity<?> crearCompeticion(@Valid @RequestBody CrearCompeticionRequest request){
-        try{
             var competicion = competicionService.crearCompeticion(request);
             return ResponseEntity.ok().body("Competición creada con éxito. ID: " + competicion.getId());
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body("Error al crear competicion: " + e.getMessage());
-        }
     }
 
     @GetMapping
     public ResponseEntity<List<CompeticionResponse>> listarCompeticiones(){
-        try{
-            List<CompeticionResponse> lista = competicionService.listarTodas();
-            return ResponseEntity.ok(lista);
-        }catch(Exception e){
-            return ResponseEntity.internalServerError().build();
-        }
+            return ResponseEntity.ok(competicionService.listarTodas());
     }
 }

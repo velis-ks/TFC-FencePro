@@ -20,13 +20,8 @@ public class UsuarioController {
         //1. Quién hace la petición desde el Token
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
-
-        try{
             //2. Buscar los datos inteligentes
             Object perfil = usuarioService.obtenerPerfilInteligente(email);
             return ResponseEntity.ok(perfil);
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body("No se puede recuperar el perfil: " + e.getMessage());
-        }
     }
 }

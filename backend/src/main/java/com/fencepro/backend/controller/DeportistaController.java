@@ -3,9 +3,12 @@ package com.fencepro.backend.controller;
 import com.fencepro.backend.dto.RegistroDeportistaRequest;
 import com.fencepro.backend.dto.response.DeportistaPerfilResponse;
 import com.fencepro.backend.service.DeportistaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,31 +16,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/deportistas")
 @RequiredArgsConstructor
+@Tag(name= "Deportistas", description = "Gestión de perfiles de deportistas")
 public class DeportistaController {
 
     private final DeportistaService deportistaService;
 
     @PostMapping("/registro")
+    @Operation(summary = "Alta deportista", description = "Creación de usuario y ficha de deportista")
     public ResponseEntity<?> registrar(@Valid @RequestBody RegistroDeportistaRequest request) {
 
-        try {
-            var deportista = deportistaService.registrarDeportista(request);
-
-            return ResponseEntity.ok("Deportista creado con éxito. ID: " + deportista.getId() +
-                    " | Categoría: " + deportista.getCategoria());
-
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error en el registro: " + e.getMessage());
-        }
+        var deportista = deportistaService.registrarDeportista(request);
+        return ResponseEntity.ok("Deportista creado correctamente. ID: " +deportista.getId());
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLUB')")
     public ResponseEntity<List<DeportistaPerfilResponse>> listarDeportistas() {
-        try {
-            List<DeportistaPerfilResponse> lista = deportistaService.listarTodos();
-            return ResponseEntity.ok(lista);
-        }catch (Exception e){
-            return ResponseEntity.internalServerError().build();
-        }
+        return ResponseEntity.ok(deportistaService.listarTodos());
     }
 }

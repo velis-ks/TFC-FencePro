@@ -19,21 +19,12 @@ public class ClubController {
 
     @PostMapping("/registro")
     public ResponseEntity<?> registrar(@Valid @RequestBody RegistroClubRequest request){
-        try{
             var club = clubService.registrarClub(request);
             return ResponseEntity.ok("Club registrado con éxito. ID: " +  club.getId() + " | Nombre: " + club.getNombreClub());
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body("Error en el registro: " + e.getMessage());
-        }
     }
 
     @GetMapping
     public ResponseEntity<List<ClubPerfilResponse>> listarClubes() {
-        try {
-            List<ClubPerfilResponse> lista = clubService.listarTodos();
-            return ResponseEntity.ok(lista);
-        }catch (Exception e){
-            return ResponseEntity.internalServerError().build();
-        }
+            return ResponseEntity.ok(clubService.listarTodos());
     }
 }

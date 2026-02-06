@@ -28,37 +28,24 @@ public class InscripcionController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
 
-        try{
             var inscripcion = inscripcionService.inscribirse(email, request);
             return ResponseEntity.ok("Inscripción solicitada correctamente. Estado: " + inscripcion.getEstado());
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
     }
 
     //Ver lista de inscritos (solo Admin/Club)
     @GetMapping("/competicion/{competicionId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'CLUB')")
     public ResponseEntity<List<InscripcionResponse>> verInscritos(@PathVariable Long competicionId){
-        try{
-            List<InscripcionResponse> lista = inscripcionService.listarPorCompeticion(competicionId);
-            return ResponseEntity.ok(lista);
-        }catch (Exception e){
-            return ResponseEntity.internalServerError().build();
-        }
+            return ResponseEntity.ok(inscripcionService.listarPorCompeticion(competicionId));
     }
 
-    //Cambiar estado (Aceptar/Rechazar)
+    //Actualizar estado (Aceptar/Rechazar)
     @PatchMapping("/{id}/estado")
     @PreAuthorize("hasAnyRole('ADMIN', 'CLUB')")
     public ResponseEntity<?> actualizarEstado(
             @PathVariable Long id,
             @RequestBody CambioEstadoInscripcionRequest request) {
-        try{
             var response = inscripcionService.cambiarEstado(id, request);
             return ResponseEntity.ok(response);
-        } catch(Exception e){
-            return ResponseEntity.badRequest().body("Error al actualizar el estado: " + e.getMessage());
-        }
     }
 }

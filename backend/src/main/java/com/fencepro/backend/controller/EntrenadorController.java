@@ -20,21 +20,12 @@ public class EntrenadorController {
 
     @PostMapping("/registro")
     public ResponseEntity<?> registrar(@Valid @RequestBody RegistroEntrenadorRequest request){
-        try{
             var entrenador = entrenadorService.registrarEntrenador(request);
             return ResponseEntity.ok("Entrenador registrado con éxito. ID: " + entrenador.getId());
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body("Error durante el registro: " + e.getMessage());
-        }
     }
 
     @GetMapping
     public ResponseEntity<List<EntrenadorPerfilResponse>> listarEntrenadores() {
-        try {
-            List<EntrenadorPerfilResponse> lista = entrenadorService.listarTodos();
-            return ResponseEntity.ok(lista);
-        }catch (Exception e){
-            return ResponseEntity.internalServerError().build();
-        }
+            return ResponseEntity.ok(entrenadorService.listarTodos());
     }
 }

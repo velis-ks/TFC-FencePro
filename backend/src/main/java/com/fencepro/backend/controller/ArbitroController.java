@@ -21,21 +21,12 @@ public class ArbitroController {
 
     @PostMapping("/registro")
     public ResponseEntity<?> registrar(@Valid @RequestBody RegistroArbitroRequest request) {
-        try{
             var arbitro = arbitroService.registrarArbitro(request);
             return ResponseEntity.ok("Árbitro registrado con éxito. ID: "  + arbitro.getId());
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body("Error en el registro: " + e.getMessage());
-        }
     }
 
     @GetMapping
     public ResponseEntity<List<ArbitroPerfilResponse>> listarArbitros() {
-        try {
-            List<ArbitroPerfilResponse> lista = arbitroService.listarTodos();
-            return ResponseEntity.ok(lista);
-        }catch (Exception e){
-            return ResponseEntity.internalServerError().build();
-        }
+            return ResponseEntity.ok(arbitroService.listarTodos());
     }
 }
