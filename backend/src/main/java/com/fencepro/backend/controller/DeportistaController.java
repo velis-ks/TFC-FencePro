@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/deportistas")
 @RequiredArgsConstructor
-@Tag(name= "Deportistas", description = "Gestión de perfiles de deportistas")
+@Tag(name= "Deportistas", description = "Gestión rol DEPORTISTA")
 public class DeportistaController {
 
     private final DeportistaService deportistaService;

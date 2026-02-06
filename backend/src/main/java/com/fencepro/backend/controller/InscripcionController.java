@@ -4,6 +4,9 @@ import com.fencepro.backend.dto.CambioEstadoInscripcionRequest;
 import com.fencepro.backend.dto.SolicitudInscripcionRequest;
 import com.fencepro.backend.dto.response.InscripcionResponse;
 import com.fencepro.backend.service.InscripcionService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/inscripciones")
 @RequiredArgsConstructor
+@Tag(name = "Inscripciones", description = "Gestión de INSCRIPCIONES en torneos")
 public class InscripcionController {
 
     private final InscripcionService inscripcionService;
 
+    @Operation(
+            summary = "Solicitud de inscripción (Deportista)",
+            description = "DEPORTISTA solicita participar en un torneo o evento",
+            security = @SecurityRequirement(name="bearerAuth")
+    )
     @PostMapping("/solicitar")
     @PreAuthorize("hasRole('DEPORTISTA')")
     public ResponseEntity<?> solicitarInscripcion(@Valid @RequestBody SolicitudInscripcionRequest request){
@@ -33,6 +42,11 @@ public class InscripcionController {
     }
 
     //Ver lista de inscritos (solo Admin/Club)
+    @Operation(
+            summary = "Ver inscritos por competición",
+            description = "Rol ADMIN o CLUB. Muestra el listado de los deportistas apuntados en un torneo",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     @GetMapping("/competicion/{competicionId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'CLUB')")
     public ResponseEntity<List<InscripcionResponse>> verInscritos(@PathVariable Long competicionId){
@@ -40,6 +54,11 @@ public class InscripcionController {
     }
 
     //Actualizar estado (Aceptar/Rechazar)
+    @Operation(
+            summary = "Actualizar estado de la inscripción",
+            description = "Rol ADMIN o CLUB. Permite ACEPTAR, RECHAZAR o CANCELAR una inscripción",
+            security = @SecurityRequirement(name="bearerAuth")
+    )
     @PatchMapping("/{id}/estado")
     @PreAuthorize("hasAnyRole('ADMIN', 'CLUB')")
     public ResponseEntity<?> actualizarEstado(
