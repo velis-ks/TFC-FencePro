@@ -23,8 +23,19 @@ public class AuthService {
 
     // Registro usuario
     public Map<String, Object> register(String nombre, String email, String password, Rol rol) {
+        //Validar si el mail ya existe en la base de datos
         if (usuarioRepository.existsByEmail(email)) {
             throw new RuntimeException("Este email ya existe");
+        }
+
+        //SEGURIDAD: evitar el registro de Admins a través de la url pública
+        if(rol == Rol.ADMIN){
+            throw new RuntimeException("No es posible registrarse como ADMIN por esta vía. Contacte con soporte");
+        }
+
+        //Asignar Rol DEPORTISTA por DEFECTO (cuando Rol sea nulo)
+        if (rol == null){
+            rol = Rol.DEPORTISTA;
         }
 
         // Construimos el usuario
