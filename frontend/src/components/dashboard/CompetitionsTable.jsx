@@ -4,7 +4,7 @@ function CompetitionsTable() {
   return (
     <div className="card">
 
-      <h3>Competiciones</h3>
+      <h4>Competiciones</h4>
 
       <table>
         <thead>

@@ -1,16 +1,22 @@
 function LicensesCard() {
   return (
-    <div className="side-card">
+    <div className="stat-card">
 
       <h4>Licencias</h4>
 
-      <p>10/05/2026 <span className="status-green">Completado</span></p>
-      <p>10/05/2026 <span className="status-red">Rechazado</span></p>
-      <p>10/05/2026 <span className="status-orange">Pendiente</span></p>
+      <div className="insc-row">
+        <span>10/05/2026</span> <span className="status-green">Completado</span>
+      </div>
+      <div className="insc-row">
+        <span>10/05/2026</span> <span className="status-red">Rechazado</span>
+      </div>
+      <div className="insc-row">
+        <span>10/05/2026</span> <span className="status-orange">Pendiente</span>
+      </div>
 
-      <span className="link-action">
+      <div className="link-action">
         + Ver transacciones
-      </span>
+      </div>
 
     </div>
   );

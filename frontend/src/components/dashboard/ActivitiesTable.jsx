@@ -2,7 +2,7 @@ function ActivitiesTable() {
   return (
     <div className="card">
 
-      <h3>Actividades</h3>
+      <h4>Actividades</h4>
 
       <table>
         <thead>

@@ -1,0 +1,203 @@
+/* CONTENEDOR */
+
+.deportista-dashboard {
+  padding: 25px;
+  
+}
+
+/* FILA 1 */
+
+.deportista-row-1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px;
+  margin-bottom: 22px;
+  padding: 50px;
+}
+
+/* FILA 2 */
+
+.deportista-row-2 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 44px;
+  padding: 50px;
+}
+
+/* CARD BASE */
+
+.depor-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  font-size: 18px;
+}
+
+.depor-card h3 {
+  margin-bottom: 15px;
+}
+
+/* FILAS */
+
+.depor-row {
+  display: flex;
+  justify-content: space-between;
+
+  background: #f5f6f7;
+  padding: 6px 10px;
+  border-radius: 6px;
+
+  margin-bottom: 6px;
+}
+
+/* CIRCULO */
+
+.circle-progress {
+  width: 140px;
+  height: 140px;
+
+  border: 15px solid #5a9c3d;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 10px auto;
+
+  font-size: 22px;
+}
+
+/* BOTONES */
+
+.btn-green {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  font-size: 18px;
+  background: #6aa84f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+
+  cursor: pointer;
+}
+
+.btn-green:hover {
+  opacity: 0.9;
+}
+
+.btn-whatsapp {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  font-size: 18px;
+  background: #f4f6f8;
+  border: none;
+  border-radius: 6px;
+}
+
+/* TABLA */
+
+.depor-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.depor-table th {
+  background: #f3f4f6;
+  padding: 8px;
+}
+
+.depor-table td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+/* DOTS */
+
+.red-dot::after {
+  content: "●";
+  color: red;
+}
+
+.green-dot::after {
+  content: "●";
+  color: green;
+}
+
+/* COLORES */
+
+.green {
+  color: #2e7d32;
+}
+
+/* LICENCIA */
+
+.licencia-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* PARTE SUPERIOR */
+
+.licencia-header {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  
+}
+
+/* FOTO */
+
+.licencia-avatar {
+  width: 140px;
+  height: 140px;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  border: 5px solid #069e3b;
+}
+
+/* INFO */
+
+.licencia-info p {
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+/* BADGE CATEGORIA */
+
+.badge {
+  background: #e6f3e6;
+  color: #2e7d32;
+
+  padding: 2px 8px;
+  border-radius: 12px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* BLOQUE EXTRA */
+
+.licencia-extra {
+  background: #f6f7f8;
+  padding: 8px 10px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+}
+
+/* ACCIONES */
+
+.licencia-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}

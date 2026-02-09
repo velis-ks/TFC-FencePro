@@ -1,6 +1,6 @@
 function InscriptionsCard() {
   return (
-    <div className="side-card inscriptions-panel">
+    <div className="stat-card inscriptions-panel">
 
       <h4>Inscripciones</h4>
 
@@ -29,9 +29,9 @@ function InscriptionsCard() {
         <span>2000</span>
       </div>
 
-      <span className="link-action">
+      <div className="link-action">
         + Gestionar inscripciones
-      </span>
+      </div>
 
     </div>
   );

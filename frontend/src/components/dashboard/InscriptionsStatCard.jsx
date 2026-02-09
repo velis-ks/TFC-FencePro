@@ -14,9 +14,9 @@ function InscriptionsStatCard() {
       </div>
 
 
-       <span className="link-action">
+       <div className="link-action">
         + Gestionar inscripciones
-      </span>
+      </div>
 
     </div>
   );
