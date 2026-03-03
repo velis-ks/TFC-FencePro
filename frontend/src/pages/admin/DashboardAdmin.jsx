@@ -16,38 +16,24 @@ import '../../styles/dashboardAdmin.css';
 function DashboardAdmin() {
   return (
     <DashboardLayout>
-
       <div className="dashboard-admin">
-
         {/* FILA 1 */}
         <div className="stats-grid">
-
-          <StatsCards />
-
-          
-
+          <StatsCards />     
         </div>
-
         {/* FILA 2 */}
         <div className="dashboard-row-2">
-
           <CompetitionsTable />
           <LicensesCard />
-
         </div>
-
         {/* FILA 3 */}
         <div className="dashboard-row-3">
-
           <ActivitiesTable />
           <InscriptionsCard />
           <UsersCard />
           <FacturacionCard />
-
         </div>
-
       </div>
-
     </DashboardLayout>
   );
 }

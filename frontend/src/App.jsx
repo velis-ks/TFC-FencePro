@@ -3,6 +3,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import DashboardAdmin from './pages/admin/DashboardAdmin';
 import DashboardDeportista from './pages/deportista/DashboardDeportista';
+import DashboardEntrenador from "./pages/entrenador/DashboardEntrenador";
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/admin" element={<DashboardAdmin />} />
       <Route path="/deportista" element={<DashboardDeportista />} />
+      <Route path="/entrenador" element={<DashboardEntrenador />} />
 
       
 
