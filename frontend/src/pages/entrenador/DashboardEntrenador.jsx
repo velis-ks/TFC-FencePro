@@ -11,7 +11,8 @@ function DashboardEntrenador() {
   return (
     <EntrenadorLayout>
 
-      {/* FILA 1 - STATS */}
+      <div className="dashboard-entrenador">
+        {/* FILA 1 - STATS */}
       <StatsEntrenador />
 
       {/* FILA 2 */}
@@ -26,6 +27,7 @@ function DashboardEntrenador() {
         <ProximasSesionesCard />
         <AsistenciasRecientesCard />
         <IndicadoresProgresoCard />
+      </div>
       </div>
 
     </EntrenadorLayout>

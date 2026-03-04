@@ -5,13 +5,13 @@ function LicensesCard() {
       <h4>Licencias</h4>
 
       <div className="insc-row">
-        <span>10/05/2026</span> <span className="status-green">Completado</span>
+        <span>Licencia nº 0000001</span> <span className="status-green">Completado</span>
       </div>
       <div className="insc-row">
-        <span>10/05/2026</span> <span className="status-red">Rechazado</span>
+        <span>Licencia nº 0034563</span> <span className="status-red">Rechazado</span>
       </div>
       <div className="insc-row">
-        <span>10/05/2026</span> <span className="status-orange">Pendiente</span>
+        <span>Licencia nº 0002341</span> <span className="status-orange">Pendiente</span>
       </div>
 
       <div className="link-action">

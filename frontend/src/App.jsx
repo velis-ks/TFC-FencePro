@@ -4,7 +4,7 @@ import Register from './pages/auth/Register';
 import DashboardAdmin from './pages/admin/DashboardAdmin';
 import DashboardDeportista from './pages/deportista/DashboardDeportista';
 import DashboardEntrenador from "./pages/entrenador/DashboardEntrenador";
-
+import DashboardClub from "./pages/club/DashboardClub";
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
       <Route path="/admin" element={<DashboardAdmin />} />
       <Route path="/deportista" element={<DashboardDeportista />} />
       <Route path="/entrenador" element={<DashboardEntrenador />} />
+      <Route path="/club" element={<DashboardClub />} />
 
       
 
