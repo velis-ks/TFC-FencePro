@@ -1,38 +1,52 @@
+import { Users, FileText, CreditCard, BarChart3, ChevronRight } from "lucide-react";
+
 function AccesoRapidoClub() {
   return (
     <div className="club-card acceso-rapido">
       <h4>Acceso rápido</h4>
 
       <div className="quick-item">
-        <div>
-          <span>📋 Gestión de Deportistas</span>
-          <small>Activo</small>
+        <div className="quick-left">
+          <Users size={18} />
+          <div>
+            <span>Gestión de Deportistas</span>
+            <small>Activo</small>
+          </div>
         </div>
-        <span className="arrow">›</span>
+        <ChevronRight size={18} className="arrow"/>
       </div>
 
       <div className="quick-item">
-        <div>
-          <span>📄 Renovar Licencias</span>
-          <small>Activo</small>
+        <div className="quick-left">
+          <FileText size={18} />
+          <div>
+            <span>Renovar Licencias</span>
+            <small>Activo</small>
+          </div>
         </div>
-        <span className="arrow">›</span>
+        <ChevronRight size={18} className="arrow"/>
       </div>
 
       <div className="quick-item">
-        <div>
-          <span>💳 Nuevo Pago</span>
-          <small>Activo</small>
+        <div className="quick-left">
+          <CreditCard size={18} />
+          <div>
+            <span>Nuevo Pago</span>
+            <small>Activo</small>
+          </div>
         </div>
-        <span className="arrow">›</span>
+        <ChevronRight size={18} className="arrow"/>
       </div>
 
       <div className="quick-item">
-        <div>
-          <span>📊 Informes y Estadísticas</span>
-          <small>Activo</small>
+        <div className="quick-left">
+          <BarChart3 size={18} />
+          <div>
+            <span>Informes y Estadísticas</span>
+            <small>Activo</small>
+          </div>
         </div>
-        <span className="arrow">›</span>
+        <ChevronRight size={18} className="arrow"/>
       </div>
 
       <div className="quick-footer">
@@ -41,4 +55,5 @@ function AccesoRapidoClub() {
     </div>
   );
 }
+
 export default AccesoRapidoClub;

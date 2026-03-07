@@ -132,3 +132,18 @@
 .quick-footer:hover {
   text-decoration: underline;
 }
+.quick-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.quick-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.arrow{
+color:#6c757d;
+}
