@@ -6,6 +6,8 @@ import DashboardDeportista from './pages/deportista/DashboardDeportista';
 import DashboardEntrenador from "./pages/entrenador/DashboardEntrenador";
 import DashboardClub from "./pages/club/DashboardClub";
 import DashboardArbitro from './pages/arbitro/DashboardArbitro';
+import LicenciasAdmin from "./pages/admin/LicenciasAdmin";
+import PagosAdmin from "./pages/admin/PagosAdmin";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <Route path="/entrenador" element={<DashboardEntrenador />} />
       <Route path="/club" element={<DashboardClub />} />
       <Route path="/arbitro" element={<DashboardArbitro />} />
+      <Route path="/admin/licencias" element={<LicenciasAdmin />} />
+      <Route path="/admin/pagos" element={<PagosAdmin />} />
 
       
 
