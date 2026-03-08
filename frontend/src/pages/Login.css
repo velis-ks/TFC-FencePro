@@ -1,0 +1,51 @@
+
+.auth-forgot {
+  margin: 4px 0 16px 0;
+  text-align: left;
+}
+
+.forgot-link {
+  display: inline-block;
+  font-size: 0.8rem;      
+  font-weight: 300;       
+  color: #1d1d1d;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.forgot-link:hover {
+  color: #084298;
+}
+
+.row-inputs {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.row-inputs input,
+.row-inputs select {
+  width: 100%;
+}
+
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  margin: 0.5rem 0 1rem;
+  text-align: left;
+}
+
+.auth-checkbox input {
+  width: auto;
+  margin: 0;             /* elimina margen por defecto */
+  position: relative;
+  top: -1px; 
+}
+
+.auth-checkbox a {
+  color: #5a9c3d;
+  text-decoration: underline;
+}
