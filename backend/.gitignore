@@ -44,3 +44,24 @@ out/
 .DS_Store
 Thumbs.db
 
+
+# ============================================
+# Environment Variables - SECURITY
+# ============================================
+# Archivos con contraseñas - NO SUBIR A GITHUB
+.env
+.env.*
+!.env.example
+*.env
+
+# Backups de configuración
+*.BACKUP_*
+application.properties.backup
+application-*.properties
+
+# AWS y credenciales
+aws-credentials.*
+credentials.txt
+
+# Scripts personales
+run-*.sh
