@@ -50,6 +50,7 @@ function LicenciasAdmin() {
                                     <th>Nombre</th>
                                     <th>Categoría</th>
                                     <th>Tipo</th>
+                                    <th>Arma</th>
                                     <th>Temporada</th>
                                     <th>Caducidad</th>
                                     <th>Estado</th>
@@ -64,6 +65,7 @@ function LicenciasAdmin() {
                                     <td>Carlos Martín</td>
                                     <td>ABS</td>
                                     <td>Competitiva</td>
+                                    <td>Florete</td>
                                     <td>25-26</td>
                                     <td>26.06.27</td>
 
@@ -87,6 +89,7 @@ function LicenciasAdmin() {
                                     <td>Carlos Martín</td>
                                     <td>ABS</td>
                                     <td>Competitiva</td>
+                                    <td>Espada</td>
                                     <td>25-26</td>
                                     <td>26.06.27</td>
 
@@ -110,6 +113,7 @@ function LicenciasAdmin() {
                                     <td>Carlos Martín</td>
                                     <td>ABS</td>
                                     <td>Competitiva</td>
+                                    <td>Sable</td>
                                     <td>25-26</td>
                                     <td>26.06.27</td>
 
