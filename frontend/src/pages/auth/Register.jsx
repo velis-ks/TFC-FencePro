@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import logo from '../assets/FencePro_Logo.png';
-import './Login.css'; 
+import logo from '../../assets/FencePro_Logo.png';
+import '../../styles/Login.css';
 
 function Register() {
   const handleSubmit = (e) => {

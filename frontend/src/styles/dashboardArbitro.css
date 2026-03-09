@@ -1,0 +1,163 @@
+/* CONTENEDOR */
+
+.arbitro-dashboard{
+padding:25px;
+}
+
+/* FILAS */
+
+.arbitro-row-1{
+display:grid;
+grid-template-columns:2fr 2fr 1fr;
+gap:22px;
+margin-bottom:22px;
+}
+
+.arbitro-row-2{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:22px;
+}
+
+/* CARDS */
+
+.arbitro-card{
+background:white;
+border-radius:16px;
+padding:20px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+font-size:14px;
+}
+
+.arbitro-card h3{
+margin-bottom:12px;
+font-size:16px;
+}
+
+/* TABLAS */
+
+.arbitro-card table{
+width:100%;
+border-collapse:collapse;
+}
+
+.arbitro-card th{
+background:#f3f4f6;
+padding:8px;
+text-align:left;
+}
+
+.arbitro-card td{
+padding:8px;
+border-bottom:1px solid #eee;
+}
+
+/* QUICK */
+
+.arbitro-quick-item{
+display:flex;
+justify-content:space-between;
+background:#f5f6f7;
+padding:8px 10px;
+border-radius:6px;
+margin-bottom:6px;
+}
+
+/* LINKS */
+
+.arbitro-link{
+margin-top:10px;
+color:#1565c0;
+cursor:pointer;
+font-size:13px;
+}
+
+/* ESTADOS */
+
+.arbitro-green{
+color:#2e7d32;
+font-weight:600;
+}
+
+.arbitro-red{
+color:#c62828;
+font-weight:600;
+}
+
+/* LICENCIA */
+
+.arbitro-actions{
+display:flex;
+gap:10px;
+margin-top:12px;
+font-size:13px;
+color:#1565c0;
+cursor:pointer;
+}
+
+.arbitro-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+display:inline-block;
+margin-right:6px;
+}
+
+.arbitro-dot-green{
+background:#2e7d32;
+}
+
+.arbitro-dot-orange{
+background:#ef6c00;
+}
+
+.arbitro-badge{
+padding:4px 10px;
+border-radius:6px;
+font-size:12px;
+font-weight:600;
+display:inline-block;
+}
+
+.arbitro-badge-red{
+background:#e53935;
+color:white;
+}
+
+.arbitro-badge-green{
+background:#43a047;
+color:white;
+}
+
+.arbitro-quick-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#f5f6f7;
+padding:10px;
+border-radius:8px;
+margin-bottom:8px;
+cursor:pointer;
+}
+
+.arbitro-quick-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.arbitro-quick-left p{
+margin:0;
+font-size:14px;
+font-weight:500;
+}
+
+.arbitro-quick-left span{
+font-size:12px;
+color:#6c757d;
+}
+
+.arbitro-status-active{
+color:#2e7d32;
+font-weight:600;
+}

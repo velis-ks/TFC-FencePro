@@ -1,6 +1,7 @@
 package com.fencepro.backend.service;
 
 import com.fencepro.backend.dto.RegistroDeportistaRequest;
+import com.fencepro.backend.dto.response.DeportistaPerfilResponse;
 import com.fencepro.model.entity.Deportista;
 import com.fencepro.model.entity.Usuario;
 import com.fencepro.model.enums.Arma;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -93,5 +96,31 @@ public class DeportistaService {
         if (fechaNacimiento == null) return Categoria.ABS;
         int edad = Period.between(fechaNacimiento, LocalDate.now()).getYears();
         return Categoria.fromEdad(edad);
+    }
+
+    //Obtener la lista de todos los deportistas
+    public List<DeportistaPerfilResponse> listarTodos(){
+        return deportistaRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    private DeportistaPerfilResponse mapToResponse(Deportista deportista) {
+        String clubName = (deportista.getClub() != null) ? deportista.getClub().getNombreClub() : "Independiente";
+
+        return DeportistaPerfilResponse.builder()
+                .id(deportista.getId())
+                .nombre(deportista.getUsuario().getNombre())
+                .apellidos(deportista.getUsuario().getApellidos())
+                .email(deportista.getUsuario().getEmail())
+                .dni(deportista.getDni())
+                .arma(deportista.getArmaPrincipal().name())
+                .categoria(deportista.getCategoria().name())
+                .nivelTecnico(deportista.getNivelTecnico().name())
+                .nombreClub(clubName)
+                .fechaNacimiento(deportista.getFechaNacimiento())
+                .rol(Rol.DEPORTISTA.name())
+                .build();
     }
 }

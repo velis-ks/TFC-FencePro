@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -16,20 +17,32 @@ public class DataSeeder implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
-        if (usuarioRepository.count() == 0) {
-            Usuario admin = Usuario.builder()
-                    .nombre("Super Admin")
-                    .apellidos("Sistema")
-                    .email("admin@fencepro.com")
-                    .password(passwordEncoder.encode("admin1234"))
-                    .rol(Rol.ADMIN)
-                    .activo(true)
-                    .emailVerificado(true)
-                    .build();
+        String emailAdmin = "admin1@fencepro.com";
 
-            usuarioRepository.save(admin);
-            System.out.println("Usuario ADMIN creado");
+        // Si el admin ya existe (del script SQL o ejecuciones previas), lo quitamos
+        // para volver a crearlo con la contraseña bien hasheada.
+        var posibleAdmin = usuarioRepository.findByEmail(emailAdmin);
+        if (posibleAdmin.isPresent()) {
+            usuarioRepository.delete(posibleAdmin.get());
+            usuarioRepository.flush();
         }
+
+        // Creamos el usuario Admin desde cero
+        Usuario admin = Usuario.builder()
+                .nombre("Super Admin")
+                .apellidos("Sistema")
+                .email(emailAdmin)
+                .password(passwordEncoder.encode("admin1234"))
+                .rol(Rol.ADMIN)
+                .telefono("600000001")
+                .activo(true)
+                .emailVerificado(true)
+                .build();
+
+        usuarioRepository.save(admin);
+
+        System.out.println(">>> DataSeeder: Usuario Admin restablecido correctamente.");
     }
 }

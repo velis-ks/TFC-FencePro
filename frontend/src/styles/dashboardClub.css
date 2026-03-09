@@ -1,0 +1,149 @@
+.dashboard-club {
+  padding: 25px;
+}
+
+/* GRID SUPERIOR */
+.club-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 25px;
+}
+
+.club-stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.club-stat-card h4 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.club-stat-card p {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.club-stat-card span {
+  font-size: 14px;
+}
+
+/* FILAS */
+.club-row-2 {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.club-row-3 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+}
+
+/* CARD BASE */
+.club-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.club-link {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #1565c0;
+  cursor: pointer;
+}
+
+/* PROGRESS */
+.progress-bar {
+  background: #eee;
+  height: 6px;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.progress-fill {
+  background: #4caf50;
+  height: 6px;
+  border-radius: 6px;
+}
+.dashboard-club .green { border: 2px solid #4caf50; color: #2e7d32; background: rgba(76, 175, 80, 0.08); }
+.dashboard-club .blue { border: 2px solid #3f51b5; color: #1a237e; background: rgba(63, 81, 181, 0.08);}
+.dashboard-club .orange { border: 2px solid #ff9800; color: #e65100; background: rgba(255, 152, 0, 0.08); }
+.dashboard-club .gold { border: 2px solid #c9a227; color: #a67c00; background: rgba(201, 162, 39, 0.10);}
+
+/* ACCESO RAPIDO */
+
+.acceso-rapido h4 {
+  background: #f1f3f5;
+  padding: 14px 18px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.quick-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 14px 16px;
+  margin: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.quick-item:hover {
+  background: #e9ecef;
+}
+
+.quick-item span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.quick-item small {
+  display: block;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.arrow {
+  font-size: 20px;
+  color: #6c757d;
+}
+
+.quick-footer {
+  padding: 12px 18px;
+  font-size: 14px;
+  color: #1565c0;
+  cursor: pointer;
+}
+
+.quick-footer:hover {
+  text-decoration: underline;
+}
+.quick-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.quick-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.arrow{
+color:#6c757d;
+}

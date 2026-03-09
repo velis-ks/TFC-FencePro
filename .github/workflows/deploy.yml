@@ -1,0 +1,75 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches: 
+      - main
+      - deploy-aws
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to EC2 via SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
+        script: |
+          echo "🚀 Iniciando deploy..."
+          
+          # Navegar al directorio del proyecto
+          cd /home/ubuntu/fencepro || mkdir -p /home/ubuntu/fencepro && cd /home/ubuntu/fencepro
+          
+          # Clonar o actualizar repositorio
+          if [ -d ".git" ]; then
+            echo "📥 Actualizando repositorio..."
+            git fetch origin
+            git reset --hard origin/main
+            git pull origin main
+          else
+            echo "📥 Clonando repositorio..."
+            git clone https://github.com/${{ github.repository }} .
+          fi
+          
+          # Crear archivo .env si no existe
+          if [ ! -f ".env" ]; then
+            echo "📝 Creando archivo .env..."
+            cat > .env << 'ENVEOF'
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          JWT_SECRET=${{ secrets.JWT_SECRET }}
+          ENVEOF
+          fi
+          
+          # Detener contenedores anteriores
+          echo "🛑 Deteniendo contenedores anteriores..."
+          docker-compose down
+          
+          # Construir y levantar nuevos contenedores
+          echo "🏗️ Construyendo nuevas imágenes..."
+          docker-compose build --no-cache
+          
+          echo "🚀 Levantando contenedores..."
+          docker-compose up -d
+          
+          # Esperar a que los servicios estén listos
+          echo "⏳ Esperando a que los servicios estén listos..."
+          sleep 10
+          
+          # Verificar estado de los contenedores
+          echo "✅ Estado de los contenedores:"
+          docker-compose ps
+          
+          # Limpiar imágenes antiguas
+          echo "🧹 Limpiando imágenes antiguas..."
+          docker system prune -f
+          
+          echo "✅ Deploy completado exitosamente!"
