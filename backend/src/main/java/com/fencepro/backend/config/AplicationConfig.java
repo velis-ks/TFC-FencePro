@@ -2,6 +2,7 @@ package com.fencepro.backend.config;
 
 import com.fencepro.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,13 +12,16 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
-
 public class AplicationConfig {
     private final UsuarioRepository usuarioRepository;
+    
+    @Value("${spring.profiles.active:prod}")
+    private String activeProfile;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -40,6 +44,13 @@ public class AplicationConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // En desarrollo: sin encriptación
+        // En producción: con BCrypt
+        if ("dev".equals(activeProfile)) {
+            System.out.println("⚠️  MODO DESARROLLO: Contraseñas SIN encriptar");
+            return NoOpPasswordEncoder.getInstance();
+        }
+        System.out.println("🔒 MODO PRODUCCIÓN: Contraseñas encriptadas con BCrypt");
         return new BCryptPasswordEncoder();
     }
 }
