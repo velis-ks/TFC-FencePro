@@ -177,17 +177,17 @@ color:white;
 /* estados */
 
 .estado-activo{
-background:#2e7d32;
+color:#2e7d32;
 }
 
 .estado-inactivo{
-background:#ef6c00;
+color:#ef6c00;
 }
 
 .estado-bloqueado{
-background:#c62828;
+color:#c62828;
 }
 
 .estado-pendiente{
-background:#3f51b5;
+color:#3f51b5;
 }
