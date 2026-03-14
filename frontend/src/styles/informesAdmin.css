@@ -1,0 +1,534 @@
+/* =========================
+   PAGE
+========================= */
+
+.informes-admin{
+padding:20px;
+}
+
+.informes-title{
+color:#2e7d32;
+margin-bottom:20px;
+font-weight:600;
+}
+
+
+/* =========================
+   GRID LAYOUT
+========================= */
+
+.informes-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:50px;
+margin-bottom:20px;
+}
+
+.informes-grid{
+display:grid;
+grid-template-columns:1fr 1.2fr 2.6fr 1fr;
+gap:20px;
+margin-bottom:20px;
+}
+
+.informes-bottom{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+background:white;
+border-radius:12px;
+padding:16px;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+display:flex;
+flex-direction:column;
+}
+
+.card h4{
+margin-bottom:12px;
+font-weight:600;
+}
+
+.card-link{
+margin-top:10px;
+font-size:13px;
+color:#1976d2;
+cursor:pointer;
+}
+
+.card-link:hover{
+text-decoration:underline;
+}
+
+
+/* =========================
+   CARD HEADER (TITLE + FILTERS)
+========================= */
+
+.card-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.informes .stat-card{
+padding:16px;
+border-radius:14px;
+border:2px solid;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+min-height:95px;
+}
+.stat-card{
+width:100%;
+box-sizing:border-box;
+}
+
+.informes .stat-header{
+display:flex;
+align-items:center;
+gap:6px;
+font-weight:500;
+margin-bottom:8px;
+font-size:14px;
+}
+
+.stat-card h2{
+font-size:30px;
+margin:0;
+font-weight:700;
+}
+
+.stat-card p{
+margin-top:6px;
+font-size:14px;
+}
+
+.stat-green{
+background:#eef7ef;
+border-color:#2e7d32;
+color:#2e7d32;
+}
+
+.stat-blue{
+background:#eef1ff;
+border-color:#3f51b5;
+color:#3f51b5;
+}
+
+.stat-yellow{
+background:#fff6e1;
+border-color:#c58c00;
+color:#c58c00;
+}
+
+.stat-orange{
+background:#fff2e5;
+border-color:#ef6c00;
+color:#ef6c00;
+}
+
+
+/* =========================
+   QUICK ACCESS
+========================= */
+
+.quick-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px;
+background:#f5f6f7;
+border-radius:8px;
+margin-bottom:8px;
+font-size:13px;
+cursor:pointer;
+}
+
+.quick-row:hover{
+background:#eceff1;
+}
+
+.quick-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.quick-left p{
+margin:0;
+font-size:13px;
+}
+
+.quick-left span{
+font-size:11px;
+color:#777;
+}
+
+
+/* =========================
+   FILTERS
+========================= */
+
+.informes .filtros{
+display:flex;
+gap:8px;
+align-items:center;
+}
+
+.informes .filtro{
+background:white;
+border:1px solid #ddd;
+padding:6px 10px;
+border-radius:6px;
+font-size:13px;
+cursor:pointer;
+transition:all 0.2s;
+}
+
+.informes .filtro:hover{
+background:#f5f6f7;
+}
+
+.informes .btn-filtrar{
+background:#2e7d32;
+color:white;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+}
+
+
+/* =========================
+   TABLES
+========================= */
+
+.card table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+
+}
+
+.card th{
+text-align:left;
+padding:8px;
+background:#f5f6f7;
+font-weight:600;
+font-size:13px;
+}
+
+.card td{
+padding:8px;
+border-bottom:1px solid #eee;
+}
+
+.ranking-table{
+width:100%;
+table-layout:auto;
+}
+
+
+
+/* =========================
+   ESTADOS
+========================= */
+
+.estado{
+font-weight:500;
+}
+
+.estado-verde{
+color:#2e7d32;
+}
+
+.estado-azul{
+color:#3f51b5;
+}
+
+.estado-rojo{
+color:#d32f2f;
+}
+
+
+/* =========================
+   ACTIONS MENU
+========================= */
+
+.acciones{
+position:relative;
+}
+
+.acciones-btn{
+background:none;
+border:none;
+cursor:pointer;
+display:flex;
+align-items:center;
+}
+
+.acciones-dropdown{
+position:absolute;
+right:0;
+top:25px;
+background:white;
+border-radius:8px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+padding:6px 0;
+min-width:140px;
+z-index:10;
+}
+
+.acciones-item{
+display:flex;
+align-items:center;
+gap:8px;
+padding:8px 12px;
+font-size:13px;
+cursor:pointer;
+}
+
+.acciones-item:hover{
+background:#f5f6f7;
+}
+
+.acciones-rechazar{
+color:#d32f2f;
+}
+
+
+/* =========================
+   LICENCIAS CHART
+========================= */
+
+.line-chart{
+margin:10px 0 15px;
+}
+
+.chart-svg{
+width:100%;
+height:80px;
+}
+
+.grid{
+stroke:#e5e5e5;
+stroke-width:1;
+}
+
+.chart-line{
+fill:none;
+stroke:#2e7d32;
+stroke-width:2;
+}
+
+.chart-point{
+fill:#2e7d32;
+}
+
+.chart-labels{
+display:flex;
+justify-content:space-between;
+font-size:11px;
+color:#777;
+margin-top:4px;
+}
+.licencia-stats{
+margin-top:10px;
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.licencia-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#f5f6f7;
+padding:8px 12px;
+border-radius:6px;
+font-size:13px;
+}
+
+.licencia-row b{
+font-weight:600;
+font-size:14px;
+}
+
+/* layout */
+
+.ingresos-layout{
+display:grid;
+grid-template-columns:2fr 1.1fr 0.9fr;
+align-items:center;
+
+}
+
+/* barras */
+
+.bars-section{
+display:flex;
+flex-direction:column;
+justify-content:center;
+margin: 0 35px;
+}
+
+.bars{
+display:flex;
+gap:32px;
+align-items:flex-end;
+height:80px;
+margin-bottom:6px;
+}
+
+.bars div{
+width:10px;
+background:#2e7d32;
+border-radius:3px;
+}
+
+.bar-labels{
+display:flex;
+justify-content:space-between;
+font-size:11px;
+color:#777;
+}
+
+
+/* info central */
+.ingresos-info{
+display:flex;
+flex-direction:column;
+justify-content:center;
+margin: 0 50px;
+}
+
+.ingresos-info p{
+font-size:12px;
+color:#777;
+margin:0;
+}
+
+.ingresos-info h2{
+margin:4px 0 10px;
+font-size:22px;
+}
+
+
+/* leyenda */
+
+.legend{
+font-size:12px;
+}
+
+.legend-row{
+display:flex;
+align-items:center;
+gap:6px;
+margin-bottom:4px;
+}
+
+.legend-color{
+width:14px;
+height:4px;
+border-radius:3px;
+}
+
+.licencias{
+background:#2e7d32;
+}
+
+.inscrip{
+background:#ef5350;
+}
+
+.cuotas{
+background:#3f51b5;
+}
+
+.formacion{
+background:#9e9e9e;
+}
+
+
+/* donut */
+
+.donut{
+position:relative;
+width:120px;
+height:120px;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:auto;
+}
+
+.donut-circle{
+width:120px;
+height:120px;
+border-radius:50%;
+background:conic-gradient(
+#2e7d32 0% 55%,
+#ef5350 55% 75%,
+#3f51b5 75% 90%,
+#9e9e9e 90% 100%
+);
+}
+
+.donut-value{
+position:absolute;
+top:50%;
+left:50%;
+font-size:12px;
+font-weight:500;
+transform:translate(-50%, -50%);
+}
+
+.donut-values{
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+display:flex;
+justify-content:space-around;
+align-items:center;
+font-size:12px;
+}
+
+/* verde */
+.donut-v1{
+transform:translate(20px,-30px);
+}
+
+/* rojo */
+.donut-v2{
+transform:translate(-40px,25px);
+}
+
+/* azul */
+.donut-v3{
+transform:translate(-40px,-20px);
+}
+
+/* gris */
+.donut-v4{
+transform:translate(-25px,-50px);
+}
+

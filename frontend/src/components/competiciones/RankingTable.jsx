@@ -4,6 +4,18 @@ return(
 
 <div className="card">
 
+<div className="filtros">
+
+<div className="filtro">Competición ▾</div>
+<div className="filtro">Arma ▾</div>
+<div className="filtro">Categoría ▾</div>
+
+<button className="btn-filtrar">
++ Filtrar
+</button>
+
+</div>
+
 <h4>Ranking</h4>
 
 <table>
