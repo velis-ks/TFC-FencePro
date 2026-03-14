@@ -66,16 +66,16 @@ color:white;
 font-weight:600;
 }
 
-.estado-activa{
-background:#2e7d32;
+.licencias-admin .estado-activa{
+color: green;
 }
 
-.estado-pendiente{
-background:#ef6c00;
+.licencias-admin .estado-pendiente{
+color:#ef6c00;
 }
 
-.estado-caducada{
-background:#c62828;
+.licencias-admin .estado-caducada{
+color:#c62828;
 }
 
 /* PANEL DERECHO */
