@@ -11,6 +11,7 @@ import PagosAdmin from "./pages/admin/PagosAdmin";
 import UsuariosAdmin from "./pages/admin/UsuariosAdmin";
 import CompeticionesAdmin from "./pages/admin/CompeticionesAdmin";
 import InformesAdmin from "./pages/admin/InformesAdmin";
+import MonitorizacionAdmin from "./pages/admin/MonitorizacionAdmin";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path="/admin/usuarios" element={<UsuariosAdmin />} />
       <Route path="/admin/competiciones" element={<CompeticionesAdmin/>}/>
       <Route path="/admin/informes" element={<InformesAdmin/>}/>
+      <Route path="/admin/monitorizacion" element={<MonitorizacionAdmin/>}/>
 
       
 
