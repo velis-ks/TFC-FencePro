@@ -1,0 +1,184 @@
+.security-admin{
+padding:20px;
+}
+
+.security-title{
+color:#2e7d32;
+margin-bottom:20px;
+font-weight:600;
+}
+
+.security-grid-top{
+display:grid;
+grid-template-columns:3fr 1fr;
+gap:20px;
+margin-bottom:20px;
+}
+
+.security-grid-middle{
+display:grid;
+grid-template-columns:2fr 2fr;
+gap:20px;
+margin-bottom:20px;
+}
+
+.security-grid-bottom{
+display:grid;
+grid-template-columns:3fr 1fr;
+gap:40px;
+align-items:start;
+}
+
+/* cards */
+
+.security-card{
+background:white;
+border-radius:12px;
+padding:16px;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+.security-card h4{
+margin-bottom:10px;
+}
+
+/* tables */
+
+.security-card table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+}
+
+.security-card th{
+text-align:left;
+padding:8px;
+background:#f5f6f7;
+}
+
+.security-card td{
+padding:8px;
+border-bottom:1px solid #eee;
+}
+
+/* status */
+
+.status-ok{
+color:#2e7d32;
+font-weight:500;
+}
+
+.status-error{
+color:#d32f2f;
+font-weight:500;
+}
+
+/* dropdown */
+
+.action-cell{
+position:relative;
+}
+
+.menu-btn{
+background:none;
+border:none;
+cursor:pointer;
+font-size:16px;
+}
+
+.dropdown{
+position:absolute;
+right:0;
+top:20px;
+background:white;
+border-radius:8px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+padding:6px 0;
+z-index:20;
+min-width:160px;
+}
+
+.dropdown-item{
+padding:8px 12px;
+font-size:13px;
+cursor:pointer;
+}
+
+.dropdown-item:hover{
+background:#f5f6f7;
+}
+
+/* side stats */
+
+.security-side{
+background:white;
+padding:16px;
+border-radius:12px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.security-stat{
+display:flex;
+justify-content:space-between;
+background:#f5f6f7;
+padding:8px;
+border-radius:6px;
+}
+
+/* filters */
+
+.security-card-header{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+border:1px solid #ddd;
+}
+
+.security-filters{
+display:flex;
+gap:10px;
+font-size:13px;
+
+}
+
+.security-filter-btn{
+background:#2e7d32;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* links */
+
+.card-link{
+margin-top:10px;
+font-size:13px;
+color:#1976d2;
+cursor:pointer;
+}
+
+.card-link:hover{
+text-decoration:underline;
+}
+
+.security-side{
+background:white;
+border-radius:12px;
+padding:16px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.security-stat{
+display:flex;
+justify-content:space-between;
+background:#f5f6f7;
+padding:8px 10px;
+border-radius:6px;
+font-size:13px;
+}

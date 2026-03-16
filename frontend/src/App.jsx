@@ -12,6 +12,8 @@ import UsuariosAdmin from "./pages/admin/UsuariosAdmin";
 import CompeticionesAdmin from "./pages/admin/CompeticionesAdmin";
 import InformesAdmin from "./pages/admin/InformesAdmin";
 import MonitorizacionAdmin from "./pages/admin/MonitorizacionAdmin";
+import NotificacionesAdmin from "./pages/admin/NotificacionesAdmin";
+import SeguridadAdmin from './pages/admin/SeguridadAdmin';
 
 function App() {
   return (
@@ -30,6 +32,9 @@ function App() {
       <Route path="/admin/competiciones" element={<CompeticionesAdmin/>}/>
       <Route path="/admin/informes" element={<InformesAdmin/>}/>
       <Route path="/admin/monitorizacion" element={<MonitorizacionAdmin/>}/>
+      <Route path="/admin/notificaciones" element={<NotificacionesAdmin/>}/>
+      <Route path="/admin/seguridad" element={<SeguridadAdmin/>}/>
+      
 
       
 
