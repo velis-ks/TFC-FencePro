@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { MoreHorizontal, Pencil, Ban, Trash } from "lucide-react";
 
-function CompeticionesTable(){
+function CompeticionesReport(){
 
 const [openMenu,setOpenMenu] = useState(null);
 
 return(
 
 <div className="card">
+
+
+
+<h4>Competiciones</h4>
 
 <div className="filtros">
 
@@ -21,9 +25,10 @@ return(
 + Filtrar
 </button>
 
+
+
 </div>
 
-<h4>Competiciones</h4>
 <table>
 
 <thead>
@@ -31,9 +36,9 @@ return(
 <th>Fecha</th>
 <th>Hora</th>
 <th>Lugar</th>
+<th>Arma</th>
 <th>Categoría</th>
 <th>Tipo</th>
-<th>Arma</th>
 <th>Modalidad</th>
 <th>Estado</th>
 <th>Acción</th>
@@ -47,11 +52,11 @@ return(
 <td>26.07.27</td>
 <td>10:00</td>
 <td>Madrid</td>
+<td>Espada</td>
 <td>ABS</td>
 <td>Nacional</td>
-<td>Florete</td>
 <td>Equipos</td>
-<td className="estado estado-confirmado">En curso</td>
+<td className="estado estado-verde">En curso</td>
 
 <td className="acciones">
 
@@ -76,7 +81,7 @@ Editar
 Bloquear
 </div>
 
-<div className="acciones-item acciones-eliminar">
+<div className="acciones-item acciones-rechazar">
 <Trash size={14}/>
 Eliminar
 </div>
@@ -93,11 +98,11 @@ Eliminar
 <td>26.07.27</td>
 <td>10:00</td>
 <td>Madrid</td>
+<td>Espada</td>
 <td>ABS</td>
 <td>Nacional</td>
-<td>Espada</td>
 <td>Individual</td>
-<td className="estado estado-pendiente">Próx.</td>
+<td className="estado estado-azul">Próx.</td>
 <td><MoreHorizontal size={18}/></td>
 </tr>
 
@@ -105,11 +110,11 @@ Eliminar
 <td>26.07.27</td>
 <td>10:00</td>
 <td>Madrid</td>
+<td>Espada</td>
 <td>ABS</td>
 <td>Nacional</td>
-<td>Sable</td>
 <td>Equipos</td>
-<td className="estado estado-rechazado">Finalizado</td>
+<td className="estado estado-rojo">Finalizado</td>
 <td><MoreHorizontal size={18}/></td>
 </tr>
 
@@ -118,7 +123,7 @@ Eliminar
 </table>
 
 <div className="card-link">
-→ Crear competición
+→ Descargar histórico competiciones
 </div>
 
 </div>
@@ -127,4 +132,4 @@ Eliminar
 
 }
 
-export default CompeticionesTable;
+export default CompeticionesReport;

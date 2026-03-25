@@ -39,6 +39,19 @@ return(
 
 <div className="card">
 
+<div className="filtros">
+
+<div className="filtro">Competición ▾</div>
+<div className="filtro">Arma ▾</div>
+<div className="filtro">Categoría ▾</div>
+<div className="filtro">Modalidad ▾</div>
+
+<button className="btn-filtrar">
++ Filtrar
+</button>
+
+</div>
+
 <h4>Inscripciones</h4>
 
 <table>

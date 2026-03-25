@@ -10,6 +10,11 @@ import LicenciasAdmin from "./pages/admin/LicenciasAdmin";
 import PagosAdmin from "./pages/admin/PagosAdmin";
 import UsuariosAdmin from "./pages/admin/UsuariosAdmin";
 import CompeticionesAdmin from "./pages/admin/CompeticionesAdmin";
+import InformesAdmin from "./pages/admin/InformesAdmin";
+import MonitorizacionAdmin from "./pages/admin/MonitorizacionAdmin";
+import NotificacionesAdmin from "./pages/admin/NotificacionesAdmin";
+import SeguridadAdmin from './pages/admin/SeguridadAdmin';
+import ConfiguracionAdmin from './pages/admin/ConfiguracionAdmin';
 
 function App() {
   return (
@@ -26,6 +31,12 @@ function App() {
       <Route path="/admin/pagos" element={<PagosAdmin />} />
       <Route path="/admin/usuarios" element={<UsuariosAdmin />} />
       <Route path="/admin/competiciones" element={<CompeticionesAdmin/>}/>
+      <Route path="/admin/informes" element={<InformesAdmin/>}/>
+      <Route path="/admin/monitorizacion" element={<MonitorizacionAdmin/>}/>
+      <Route path="/admin/notificaciones" element={<NotificacionesAdmin/>}/>
+      <Route path="/admin/seguridad" element={<SeguridadAdmin/>}/>
+      <Route path="/admin/configuracion" element={<ConfiguracionAdmin/>}/>
+      
 
       
 

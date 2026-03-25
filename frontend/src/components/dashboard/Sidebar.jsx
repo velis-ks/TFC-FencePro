@@ -24,7 +24,7 @@ function Sidebar() {
             </nav>
 
             <div className="sidebar-footer">
-                ⚙️ Configuración
+                <NavLink to="/admin/configuracion">⚙️ Configuración</NavLink>
             </div>
         </aside>
     );
