@@ -100,4 +100,9 @@ public class UsuarioService {
 
         }
     }
+
+    // Mostrar todos los usuarios
+    public Object obtenerTodos() {
+        return usuarioRepository.findAll();
+    }
 }

@@ -1,48 +1,72 @@
+import { useState, useEffect } from "react";
 import UsuariosFilters from "../UsuariosFilters";
 import UsuariosTable from "../UsuariosTable";
 import UsuariosSideStats from "../UsuariosSideStats";
 
+function DeportistasTab() {
+    const [deportistas, setDeportistas] = useState([]);
+    const [cargando, setCargando] = useState(true);
 
-function DeportistasTab(){
+    const columns = [
+        "Nombre",
+        "Apellidos",
+        "Email",
+        "Rol",
+        "Club"
+    ];
 
-const columns = [
-"Nº licencia",
-"Nombre",
-"Club",
-"Género",
-"Categoría",
-"Arma",
-"Temporada",
-"Estado"
-];
+    useEffect(() => {
+        const fetchDeportistas = async () => {
+            try {
+                // Hacemos la llamada al backend.
+                // Si tu endpoint para usuarios es distinto, cambialo aquí (ej: /api/users o /api/usuarios/deportistas)
+                const response = await fetch('/api/usuarios');
 
-const data = [
-["012345678","Carlos Martín","Club Madrid","Femenino","INF","Florete","25-26","Activo"],
-["012345678","Carlos Martín","Club Madrid","Masculino","ABS","Espada","25-26","Inactivo"]
-];
+                if (!response.ok) {
+                    throw new Error('Error al cargar los datos');
+                }
 
-return(
+                const data = await response.json();
 
-<div className="usuarios-grid">
+                // Transformamos el JSON de Java al formato de array que espera tu UsuariosTable
+                const formatoTabla = data.map(usuario => [
+                    usuario.nombre || "Sin nombre",
+                    usuario.apellidos || "-",
+                    usuario.email || "-",
+                    usuario.rol || "-",
+                    usuario.club || "-"
+                ]);
 
-<div>
+                setDeportistas(formatoTabla);
+            } catch (error) {
+                console.error("Error cargando deportistas:", error);
+            } finally {
+                setCargando(false);
+            }
+        };
 
-<UsuariosFilters/>
+        fetchDeportistas();
+    }, []);
 
-<UsuariosTable
-title="Usuarios deportistas"
-columns={columns}
-data={data}
-/>
+    return (
+        <div className="usuarios-grid">
+            <div>
+                <UsuariosFilters />
 
-</div>
+                {cargando ? (
+                    <p style={{marginTop: "20px"}}>Cargando usuarios desde la base de datos...</p>
+                ) : (
+                    <UsuariosTable
+                        title="Usuarios deportistas"
+                        columns={columns}
+                        data={deportistas}
+                    />
+                )}
+            </div>
 
-<UsuariosSideStats/>
-
-</div>
-
-)
-
+            <UsuariosSideStats />
+        </div>
+    );
 }
 
 export default DeportistasTab;
