@@ -65,3 +65,4 @@ credentials.txt
 
 # Scripts personales
 run-*.sh
+fencepro-aws.pem

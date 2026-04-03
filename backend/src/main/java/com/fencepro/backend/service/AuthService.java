@@ -21,19 +21,17 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    // Registro usuario
-    public Map<String, Object> register(String nombre, String email, String password, Rol rol) {
-        //Validar si el mail ya existe en la base de datos
+    // CORREGIDO: Ahora recibe "String apellidos"
+    public Map<String, Object> register(String nombre, String apellidos, String email, String password, Rol rol) {
+
         if (usuarioRepository.existsByEmail(email)) {
             throw new RuntimeException("Este email ya existe");
         }
-
-        //SEGURIDAD: evitar el registro de Admins a través de la url pública
+/*
         if(rol == Rol.ADMIN){
             throw new RuntimeException("No es posible registrarse como ADMIN por esta vía. Contacte con soporte");
         }
-
-        //Asignar Rol DEPORTISTA por DEFECTO (cuando Rol sea nulo)
+*/
         if (rol == null){
             rol = Rol.DEPORTISTA;
         }
@@ -41,9 +39,9 @@ public class AuthService {
         // Construimos el usuario
         var usuario = Usuario.builder()
                 .nombre(nombre)
-                .apellidos("")
+                .apellidos(apellidos) // CORREGIDO: Antes tenías .apellidos("")
                 .email(email)
-                .password(passwordEncoder.encode(password)) //Encriptación de contraseña
+                .password(passwordEncoder.encode(password))
                 .rol(rol)
                 .activo(true)
                 .build();
@@ -51,11 +49,9 @@ public class AuthService {
         usuarioRepository.save(usuario);
         String token = jwtService.generateToken(usuario.getUsername());
 
-
         return Map.of("token", token, "rol", rol);
     }
 
-    // Login usuario
     public Map<String, Object> login(String email, String password) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password)

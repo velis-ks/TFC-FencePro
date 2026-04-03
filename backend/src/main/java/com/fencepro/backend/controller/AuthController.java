@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth") // AÑADIDO /api AQUÍ
 @RequiredArgsConstructor
 @Tag(name = "Autenticación", description = "LOGIN y REGISTRO de usuarios")
 public class AuthController {
@@ -21,17 +21,19 @@ public class AuthController {
     private final AuthService authService;
 
     public record LoginRequest(String email, String password) {}
-    public record RegisterRequest(String nombre, String email, String password, Rol rol) {}
+    public record RegisterRequest(String nombre, String apellidos, String email, String password, Rol rol) {}
 
-    @Operation(summary = "Registrar nuevo usuario", description = "Creación de nuevos usuarios + token JWT. No permite crear ADMINs")
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request){
         return ResponseEntity.ok(authService.register(
-                request.nombre(), request.email(), request.password(), request.rol()
+                request.nombre(),
+                request.apellidos(),
+                request.email(),
+                request.password(),
+                request.rol()
         ));
     }
 
-    @Operation(summary = "Iniciar sesión", description = "Valida credenciales y devuelve JWT + Rol")
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request){
         return ResponseEntity.ok(authService.login(request.email(), request.password()));
@@ -39,10 +41,8 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<?> logout(){
-        return ResponseEntity.ok(Map.of("message", "Logout OK (Borrar token en cliente)"));
+        return ResponseEntity.ok(Map.of("message", "Logout OK"));
     }
-
-    //Endpoints de prueba
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/me")
@@ -51,17 +51,5 @@ public class AuthController {
                 "username", authentication.getName(),
                 "authorities", authentication.getAuthorities()
         ));
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/admin-only")
-    public ResponseEntity<?> adminOnly(){
-        return ResponseEntity.ok(Map.of("message", "Zona Admin: Acceso concedido"));
-    }
-
-    @PreAuthorize("hasRole('ENTRENADOR')")
-    @GetMapping("/entrenador-only")
-    public ResponseEntity<?> entrenadorOnly(){
-        return ResponseEntity.ok(Map.of("message", "Zona Entrenador: Acceso concedido"));
     }
 }

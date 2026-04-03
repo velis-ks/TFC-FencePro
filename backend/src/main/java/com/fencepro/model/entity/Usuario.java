@@ -1,11 +1,9 @@
 package com.fencepro.model.entity;
 
 import com.fencepro.model.enums.Rol;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,42 +12,35 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Entidad que representa a cualquier usuario del sistema.
- * Mapea la tabla 'usuarios'.
- * Todos los actores (Deportista, Entrenador, Club...) tienen un Usuario asociado.
- */
 @Entity
 @Table(name = "usuarios")
-@Data // Lombok: Genera Getters, Setters, toString, equals, hashcode automáticamente
-@Builder //Crear objetos fácilmente
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Usuario implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremental en MySQL
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // El email es el username para el login. Debe ser único.
     @Column(unique = true, nullable = false, length = 100)
     private String email;
 
-    // En BBDD se llama 'password_hash', en Java lo llamamos 'password'
     @Column(name = "password_hash", nullable = false)
     private String password;
 
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(nullable = false, length = 150)
+    // FORZAMOS EL MAPEO CON LA "S"
+    @JsonProperty("apellidos")
+    @Column(name = "apellidos", nullable = false, length = 150)
     private String apellidos;
 
     @Column(length = 20)
     private String telefono;
 
-    // Guardamos el nombre del Enum ("ADMIN") en la BBDD, no el número
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Rol rol;
@@ -57,43 +48,32 @@ public class Usuario implements UserDetails {
     @Column(name = "fecha_registro")
     private LocalDateTime fechaRegistro;
 
-    // Por defecto es TRUE según el script SQL
     @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean activo;
 
     @Column(name = "email_verificado")
     private Boolean emailVerificado;
 
-    /**
-     * Se ejecuta automáticamente antes de insertar un nuevo usuario en la BBDD.
-     * Inicializa la fecha de registro y el estado activo.
-     */
     @PrePersist
     protected void onCreate() {
         fechaRegistro = LocalDateTime.now();
-        if (activo == null) {
-            activo = true;
-        }
+        if (activo == null) activo = true;
     }
 
-    //Métodos de seguridad (UserDetails)
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + rol.name()));
+    // SETTER MANUAL (Para asegurar que Jackson encuentre el camino)
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    @Override
-    public String getUsername() {
-        return email; //Uso del email para loguearse
+    public String getApellidos() {
+        return this.apellidos;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {return true;}
-    @Override
-    public boolean isAccountNonLocked() {return true;}
-    @Override
-    public boolean isCredentialsNonExpired() {return true;}
-    @Override
-    public boolean isEnabled() {return Boolean.TRUE.equals(activo);}
+    // Métodos UserDetails...
+    @Override public Collection<? extends GrantedAuthority> getAuthorities() { return List.of(new SimpleGrantedAuthority("ROLE_" + rol.name())); }
+    @Override public String getUsername() { return email; }
+    @Override public boolean isAccountNonExpired() { return true; }
+    @Override public boolean isAccountNonLocked() { return true; }
+    @Override public boolean isCredentialsNonExpired() { return true; }
+    @Override public boolean isEnabled() { return Boolean.TRUE.equals(activo); }
 }

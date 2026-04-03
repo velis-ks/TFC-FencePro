@@ -12,33 +12,24 @@ import RolesPermisosTab from "../../components/usuarios/tabs/RolesPermisosTab";
 
 function UsuariosAdmin(){
 
-const [activeTab,setActiveTab] = useState("deportistas");
+    const [activeTab,setActiveTab] = useState("todos");
 
-const renderTab = () => {
-
-switch(activeTab){
-
-case "deportistas":
-return <DeportistasTab/>
-
-case "entrenadores":
-return <EntrenadoresTab/>
-
-case "arbitros":
-return <ArbitrosTab/>
-
-case "clubes":
-return <ClubesTab/>
-
-case "roles":
-return <RolesPermisosTab/>
-
-default:
-return <DeportistasTab/>
-
-}
-
-}
+    const renderTab = () => {
+        switch (activeTab) {
+            case "todos":
+                return <DeportistasTab filtroRol="TODOS" />;
+            case "deportistas":
+                return <DeportistasTab filtroRol="DEPORTISTA" />;
+            case "entrenadores":
+                return <DeportistasTab filtroRol="ENTRENADOR" />;
+            case "arbitros":
+                return <DeportistasTab filtroRol="ARBITRO" />;
+            case "clubes":
+                return <DeportistasTab filtroRol="CLUB" />;
+            default:
+                return <DeportistasTab filtroRol="TODOS" />;
+        }
+    };
 
 return(
 

@@ -13,35 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api/usuarios") // AÑADIDO /api AQUÍ
 @RequiredArgsConstructor
 @Tag(name = "Usuarios", description = "Gestion DATOS usuarios")
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
-    @Operation(
-            summary = "Obtener datos por rol",
-            description = "Devuelve los datos del usuario logueado. Ej: Club --> datos fiscales",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
     @GetMapping("/perfil")
     public ResponseEntity<?> obtenerMiPerfil() {
-        //1. Quién hace la petición desde el Token
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
-            //2. Buscar los datos inteligentes
-            Object perfil = usuarioService.obtenerPerfilInteligente(email);
-            return ResponseEntity.ok(perfil);
+        return ResponseEntity.ok(usuarioService.obtenerPerfilInteligente(email));
     }
 
-    @Operation(
-            summary = "Obtener todos los usuarios",
-            description = "Devuelve una lista con todos los usuarios registrados en la base de datos",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
     @GetMapping
     public ResponseEntity<?> obtenerTodosLosUsuarios() {
-        // Llama al método de tu servicio que devuelva la lista completa
         return ResponseEntity.ok(usuarioService.obtenerTodos());
     }
 }

@@ -1,72 +1,62 @@
-import { useState, useEffect } from "react";
-import UsuariosFilters from "../UsuariosFilters";
+import React, { useState, useEffect } from "react";
 import UsuariosTable from "../UsuariosTable";
-import UsuariosSideStats from "../UsuariosSideStats";
 
-function DeportistasTab() {
-    const [deportistas, setDeportistas] = useState([]);
+const DeportistasTab = ({ filtroRol = "TODOS" }) => {
+    const [usuarios, setUsuarios] = useState([]);
     const [cargando, setCargando] = useState(true);
 
-    const columns = [
-        "Nombre",
-        "Apellidos",
-        "Email",
-        "Rol",
-        "Club"
-    ];
+    // Definimos los nombres de las columnas que espera recibir la tabla
+    const columnas = ["Nombre", "Apellidos", "Email", "Rol", "Club", "Acción"];
 
     useEffect(() => {
-        const fetchDeportistas = async () => {
+        const fetchUsuarios = async () => {
             try {
-                // Hacemos la llamada al backend.
-                // Si tu endpoint para usuarios es distinto, cambialo aquí (ej: /api/users o /api/usuarios/deportistas)
-                const response = await fetch('/api/usuarios');
+                const token = localStorage.getItem('token');
+                const response = await fetch('/api/usuarios', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
 
-                if (!response.ok) {
-                    throw new Error('Error al cargar los datos');
-                }
+                if (!response.ok) throw new Error('Error al cargar');
 
                 const data = await response.json();
 
-                // Transformamos el JSON de Java al formato de array que espera tu UsuariosTable
-                const formatoTabla = data.map(usuario => [
-                    usuario.nombre || "Sin nombre",
-                    usuario.apellidos || "-",
-                    usuario.email || "-",
-                    usuario.rol || "-",
-                    usuario.club || "-"
+                // Filtramos los datos según la pestaña activa
+                const datosFiltrados = filtroRol === "TODOS"
+                    ? data
+                    : data.filter(u => u.rol === filtroRol);
+
+                // Mapeamos los datos al formato de array de arrays que usa tu tabla
+                const formatoTabla = datosFiltrados.map(u => [
+                    u.nombre || "-",
+                    u.apellidos || "-",
+                    u.email || "-",
+                    u.rol || "-",
+                    u.club || "Independiente",
+                    "..." // Columna de Acción
                 ]);
 
-                setDeportistas(formatoTabla);
+                setUsuarios(formatoTabla);
             } catch (error) {
-                console.error("Error cargando deportistas:", error);
+                console.error("Error cargando usuarios:", error);
             } finally {
                 setCargando(false);
             }
         };
 
-        fetchDeportistas();
-    }, []);
+        fetchUsuarios();
+    }, [filtroRol]);
+
+    if (cargando) return <p>Cargando usuarios...</p>;
 
     return (
-        <div className="usuarios-grid">
-            <div>
-                <UsuariosFilters />
-
-                {cargando ? (
-                    <p style={{marginTop: "20px"}}>Cargando usuarios desde la base de datos...</p>
-                ) : (
-                    <UsuariosTable
-                        title="Usuarios deportistas"
-                        columns={columns}
-                        data={deportistas}
-                    />
-                )}
-            </div>
-
-            <UsuariosSideStats />
-        </div>
+        <UsuariosTable
+            title={filtroRol === "TODOS" ? "Todos los Usuarios" : `Usuarios ${filtroRol.toLowerCase()}s`}
+            columns={columnas}
+            data={usuarios}
+        />
     );
-}
+};
 
 export default DeportistasTab;
